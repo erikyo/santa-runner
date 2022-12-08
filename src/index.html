@@ -1,18 +1,13 @@
 <!doctype html>
-<html dir="$i18n{textdirection}" lang="$i18n{language}">
+<html dir="{{textdirection}}" lang="{{language}}">
 <head>
   <meta charset="utf-8">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#fff">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,
-                                 maximum-scale=1.0, user-scalable=no">
-  <title>$i18n{title}</title>
-  <link rel="stylesheet" href="./neterror.css">
-  <script src="./neterror.js"></script>
-  <script src="./offline.js"></script>
-  <script src="./offline-sprite-definitions.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>{title}</title>
 </head>
-<body id="t" class="neterror" style="font-family: $i18n{fontfamily}; font-size: $i18n{fontsize}">
+<body id="t" class="neterror" style="font-family: {{fontfamily}}; font-size: {{fontsize}}">
 <div id="main-frame-error" class="interstitial-wrapper">
   <div id="main-content">
     <div class="icon"></div>
@@ -126,12 +121,12 @@
 </div>
 
 <div id="offline-resources">
-  <img id="offline-resources-1x" src="images/default_100_percent/offline/100-offline-sprite.png">
-  <img id="offline-resources-2x" src="images/default_200_percent/offline/200-offline-sprite.png">
+  <img id="offline-resources-1x">
+  <img id="offline-resources-2x">
   <template id="audio-resources">
-    <audio id="offline-sound-press" src="sounds/button-press.mp3"></audio>
-    <audio id="offline-sound-hit" src="sounds/hit.mp3"></audio>
-    <audio id="offline-sound-reached" src="sounds/score-reached.mp3"></audio>
+    <audio id="offline-sound-press"></audio>
+    <audio id="offline-sound-hit"></audio>
+    <audio id="offline-sound-reached"></audio>
   </template>
 </div>
 </body>

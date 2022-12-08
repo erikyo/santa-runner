@@ -1,0 +1,26 @@
+.icon {
+  -webkit-user-select: none;
+  display: inline-block;
+  &-generic {
+    /* Can't access chrome://theme/IDR_ERROR_NETWORK_GENERIC from an untrusted
+     * renderer process, so embed the resource manually. */
+    content: -webkit-image-set(
+            url('../images/default_100_percent/error_network_generic.png') 1x,
+            url('../images/default_200_percent/error_network_generic.png') 2x);
+  }
+
+  &-offline {
+    content: -webkit-image-set(
+            url('../images/default_100_percent/offline/100-error-offline.png') 1x,
+            url('../images/default_200_percent/offline/200-error-offline.png') 2x);
+    position: relative;
+  }
+
+  &-disabled {
+    content: -webkit-image-set(
+            url('../images/default_100_percent/offline/100-disabled.png') 1x,
+            url('../images/default_200_percent/offline/200-disabled.png') 2x);
+    width: 112px;
+  }
+}
+

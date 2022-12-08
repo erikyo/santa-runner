@@ -1,0 +1,27 @@
+html {
+  /* Don't use the main frame div when the error is in a subframe. */
+  &[subframe] #main-frame-error {
+    display: none;
+  }
+
+  /* Don't use the subframe error div when the error is in a main frame. */
+  &:not([subframe]) #sub-frame-error {
+    display: none;
+  }
+}
+
+h1 {
+  margin-top: 0;
+  word-wrap: break-word;
+  span {
+    font-weight: 500;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.hidden {
+  display: none;
+}
