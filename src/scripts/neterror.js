@@ -307,8 +307,7 @@ export function onDocumentLoadOrUpdate () {
       .classList.remove(HIDDEN_CLASS)
   }
 
-  const attemptAutoFetch = loadTimeData.valueExists('attemptAutoFetch') &&
-    loadTimeData.getValue('attemptAutoFetch')
+  // const attemptAutoFetch = loadTimeData.valueExists('attemptAutoFetch') && loadTimeData.getValue('attemptAutoFetch')
 
   const reloadButtonVisible = loadTimeData.valueExists('reloadButton') &&
     loadTimeData.getValue('reloadButton').msg

@@ -125,9 +125,6 @@ export const IS_MOBILE = /Android/.test(window.navigator.userAgent) || IS_IOS
 export const IS_RTL = document.querySelector('html').dir === 'rtl'
 
 /** @const */
-export const ARCADE_MODE_URL = 'chrome://dino/'
-
-/** @const */
 export const RESOURCE_POSTFIX = 'offline-resources-'
 
 /** @const */
@@ -268,17 +265,13 @@ Runner.prototype = {
         ? GAME_TYPE[parseInt(loadTimeData.getValue('altGameType'), 10) - 1]
         : ''
     }
-  },
-
-  /**
+  }, /**
    * Whether the easter egg has been disabled. CrOS enterprise enrolled devices.
    * @return {boolean}
    */
   isDisabled () {
     return loadTimeData && loadTimeData.valueExists('disabledEasterEgg')
-  },
-
-  /**
+  }, /**
    * For disabled instances, set up a snackbar with the disabled message.
    */
   setupDisabledRunner () {
@@ -294,9 +287,7 @@ Runner.prototype = {
         document.querySelector('.icon').classList.add('icon-disabled')
       }
     }.bind(this))
-  },
-
-  /**
+  }, /**
    * Setting individual settings for debugging.
    * @param {string} setting
    * @param {number|string} value
@@ -319,9 +310,7 @@ Runner.prototype = {
           break
       }
     }
-  },
-
-  /**
+  }, /**
    * Creates an on page image element from the base 64 encoded string source.
    * @param {string} resourceName Name in data object,
    * @return {HTMLImageElement} The created element.
@@ -340,9 +329,7 @@ Runner.prototype = {
       return el
     }
     return null
-  },
-
-  /**
+  }, /**
    * Cache the appropriate image sprite from the page and get the sprite sheet
    * definition.
    */
@@ -378,9 +365,7 @@ Runner.prototype = {
       Runner.imageSprite.addEventListener(Runner.events.LOAD,
         this.init.bind(this))
     }
-  },
-
-  /**
+  }, /**
    * Load and decode base 64 encoded sounds.
    */
   loadSounds () {
@@ -402,9 +387,7 @@ Runner.prototype = {
         }.bind(this, sound))
       }
     }
-  },
-
-  /**
+  }, /**
    * Sets the game speed. Adjust the speed accordingly if on a smaller screen.
    * @param {number=} optSpeed
    */
@@ -421,9 +404,7 @@ Runner.prototype = {
     } else if (optSpeed) {
       this.currentSpeed = optSpeed
     }
-  },
-
-  /**
+  }, /**
    * Game initialiser.
    */
   init () {
@@ -515,9 +496,7 @@ Runner.prototype = {
     darkModeMediaQuery.addListener((e) => {
       this.isDarkMode = e.matches
     })
-  },
-
-  /**
+  }, /**
    * Create the touch controller. A div that covers whole screen.
    */
   createTouchController () {
@@ -526,9 +505,7 @@ Runner.prototype = {
     this.touchController.addEventListener(Runner.events.TOUCHSTART, this)
     this.touchController.addEventListener(Runner.events.TOUCHEND, this)
     this.outerContainerEl.appendChild(this.touchController)
-  },
-
-  /**
+  }, /**
    * Debounce the resize event.
    */
   debounceResize () {
@@ -536,9 +513,7 @@ Runner.prototype = {
       this.resizeTimerId_ =
         setInterval(this.adjustDimensions.bind(this), 250)
     }
-  },
-
-  /**
+  }, /**
    * Adjust game space dimensions on resize.
    */
   adjustDimensions () {
@@ -585,9 +560,7 @@ Runner.prototype = {
         this.gameOverPanel.draw(this.altGameModeActive, this.tRex)
       }
     }
-  },
-
-  /**
+  }, /**
    * Play the game intro.
    * Canvas container width expands out to the full width.
    */
@@ -614,9 +587,7 @@ Runner.prototype = {
     } else if (this.crashed) {
       this.restart()
     }
-  },
-
-  /**
+  }, /**
    * Update the game status to started.
    */
   startGame () {
@@ -646,13 +617,10 @@ Runner.prototype = {
     window.addEventListener(Runner.events.FOCUS,
       this.onVisibilityChange.bind(this))
   },
-
   clearCanvas () {
     this.canvasCtx.clearRect(0, 0, this.dimensions.WIDTH,
       this.dimensions.HEIGHT)
-  },
-
-  /**
+  }, /**
    * Checks whether the canvas area is in the viewport of the browser
    * through the current scroll position.
    * @return boolean.
@@ -660,9 +628,7 @@ Runner.prototype = {
   isCanvasInView () {
     return this.containerEl.getBoundingClientRect().top >
       Runner.config.CANVAS_IN_VIEW_OFFSET
-  },
-
-  /**
+  }, /**
    * Enable the alt game mode. Switching out the sprites.
    */
   enableAltGameMode () {
@@ -679,9 +645,7 @@ Runner.prototype = {
     this.tRex.enableAltGameMode(this.spriteDef.TREX)
     this.horizon.enableAltGameMode(this.spriteDef)
     this.generatedSoundFx.background()
-  },
-
-  /**
+  }, /**
    * Update the game frame and schedules the next one.
    */
   update () {
@@ -733,8 +697,7 @@ Runner.prototype = {
       } else if (!this.crashed) {
         const showNightMode = this.isDarkMode ^ this.inverted
         deltaTime = !this.activated ? 0 : deltaTime
-        this.horizon.update(
-          deltaTime, this.currentSpeed, hasObstacles, showNightMode)
+        this.horizon.update(deltaTime, this.currentSpeed, hasObstacles, showNightMode)
       }
 
       // Check for collisions.
@@ -820,9 +783,7 @@ Runner.prototype = {
       this.tRex.update(deltaTime)
       this.scheduleNextUpdate()
     }
-  },
-
-  /**
+  }, /**
    * Event handler.
    * @param {Event} e
    */
@@ -844,9 +805,7 @@ Runner.prototype = {
           break
       }
     }.bind(this))(e.type, Runner.events)
-  },
-
-  /**
+  }, /**
    * Initialize audio cues if activated by focus on the canvas element.
    * @param {Event} e
    */
@@ -860,9 +819,7 @@ Runner.prototype = {
     } else if (e.keyCode && Runner.keycodes.JUMP[e.keyCode]) {
       this.onKeyDown(e)
     }
-  },
-
-  /**
+  }, /**
    * Prevent space key press from scrolling.
    * @param {Event} e
    */
@@ -870,14 +827,12 @@ Runner.prototype = {
     if (e.keyCode === 32) {
       e.preventDefault()
     }
-  },
-
-  /**
+  }, /**
    * Toggle speed setting if toggle is shown.
    */
   toggleSpeed () {
     if (Runner.audioCues) {
-      const speedChange = Runner.slowDown != this.slowSpeedCheckbox.checked
+      const speedChange = Runner.slowDown !== this.slowSpeedCheckbox.checked
 
       if (speedChange) {
         Runner.slowDown = this.slowSpeedCheckbox.checked
@@ -893,22 +848,18 @@ Runner.prototype = {
         this.disableSpeedToggle(true)
       }
     }
-  },
-
-  /**
+  }, /**
    * Show the speed toggle.
    * From focus event or when audio cues are activated.
    * @param {Event=} e
    */
   showSpeedToggle (e) {
-    const isFocusEvent = e && e.type == 'focus'
+    const isFocusEvent = e && e.type === 'focus'
     if (Runner.audioCues || isFocusEvent) {
       this.slowSpeedCheckboxLabel.classList.toggle(
         HIDDEN_CLASS, isFocusEvent ? false : !this.crashed)
     }
-  },
-
-  /**
+  }, /**
    * Disable the speed toggle.
    * @param {boolean} disable
    */
@@ -918,9 +869,7 @@ Runner.prototype = {
     } else {
       this.slowSpeedCheckbox.removeAttribute('disabled')
     }
-  },
-
-  /**
+  }, /**
    * Bind relevant key / mouse / touch listeners.
    */
   startListening () {
@@ -949,9 +898,7 @@ Runner.prototype = {
       // Gamepad
       window.addEventListener(Runner.events.GAMEPADCONNECTED, this)
     }
-  },
-
-  /**
+  }, /**
    * Remove all listeners.
    */
   stopListening () {
@@ -970,9 +917,7 @@ Runner.prototype = {
     if (this.isArcadeMode()) {
       window.removeEventListener(Runner.events.GAMEPADCONNECTED, this)
     }
-  },
-
-  /**
+  }, /**
    * Process keydown.
    * @param {Event} e
    */
@@ -985,17 +930,15 @@ Runner.prototype = {
     if (this.isCanvasInView()) {
       // Allow toggling of speed toggle.
       if (Runner.keycodes.JUMP[e.keyCode] &&
-        e.target == this.slowSpeedCheckbox) {
+        e.target === this.slowSpeedCheckbox) {
         return
       }
 
       if (!this.crashed && !this.paused) {
         // For a11y, screen reader activation.
-        const isMobileMouseInput = IS_MOBILE &&
-          e.type === Runner.events.POINTERDOWN &&
-          e.pointerType == 'mouse' && e.target == this.containerEl ||
-          (IS_IOS && e.pointerType == 'touch' &&
-            document.activeElement == this.containerEl)
+        const isMobileMouseInput =
+          (IS_MOBILE && e.type === Runner.events.POINTERDOWN && e.pointerType === 'mouse' && e.target === this.containerEl) ||
+          (IS_IOS && e.pointerType === 'touch' && document.activeElement === this.containerEl)
 
         if (Runner.keycodes.JUMP[e.keyCode] ||
           e.type === Runner.events.TOUCHSTART || isMobileMouseInput ||
@@ -1015,7 +958,7 @@ Runner.prototype = {
             this.setPlayStatus(true)
             this.update()
             if (window.errorPageController) {
-              errorPageController.trackEasterEgg()
+              window.errorPageController.trackEasterEgg()
             }
           }
           // Start jump.
@@ -1042,9 +985,7 @@ Runner.prototype = {
         }
       }
     }
-  },
-
-  /**
+  }, /**
    * Process key up.
    * @param {Event} e
    */
@@ -1073,9 +1014,7 @@ Runner.prototype = {
       this.tRex.reset()
       this.play()
     }
-  },
-
-  /**
+  }, /**
    * Process gamepad connected event.
    * @param {Event} e
    */
@@ -1083,9 +1022,7 @@ Runner.prototype = {
     if (!this.pollingGamepads) {
       this.pollGamepadState()
     }
-  },
-
-  /**
+  }, /**
    * rAF loop for gamepad polling.
    */
   pollGamepadState () {
@@ -1094,9 +1031,7 @@ Runner.prototype = {
 
     this.pollingGamepads = true
     requestAnimationFrame(this.pollGamepadState.bind(this))
-  },
-
-  /**
+  }, /**
    * Polls for a gamepad with the jump button pressed. If one is found this
    * becomes the "active" gamepad and all others are ignored.
    * @param {!Array<Gamepad>} gamepads
@@ -1110,9 +1045,7 @@ Runner.prototype = {
         return
       }
     }
-  },
-
-  /**
+  }, /**
    * Polls the chosen gamepad for button presses and generates KeyboardEvents
    * to integrate with the rest of the game logic.
    * @param {!Array<Gamepad>} gamepads
@@ -1141,9 +1074,7 @@ Runner.prototype = {
     }
 
     this.previousGamepad = gamepad
-  },
-
-  /**
+  }, /**
    * Generates a key event based on a gamepad button.
    * @param {!Gamepad} gamepad
    * @param {number} buttonIndex
@@ -1163,15 +1094,13 @@ Runner.prototype = {
       { keyCode })
       document.dispatchEvent(e)
     }
-  },
-
-  /**
+  }, /**
    * Handle interactions on the game over screen state.
    * A user is able to tap the high score twice to reset it.
    * @param {Event} e
    */
   handleGameOverClicks (e) {
-    if (e.target != this.slowSpeedCheckbox) {
+    if (e.target !== this.slowSpeedCheckbox) {
       e.preventDefault()
       if (this.distanceMeter.hasClickedOnHighScore(e) && this.highestScore) {
         if (this.distanceMeter.isHighScoreFlashing()) {
@@ -1187,9 +1116,7 @@ Runner.prototype = {
         this.restart()
       }
     }
-  },
-
-  /**
+  }, /**
    * Returns whether the event was a left click on canvas.
    * On Windows right click is registered as a click.
    * @param {Event} e
@@ -1200,9 +1127,7 @@ Runner.prototype = {
       e.type === Runner.events.POINTERUP &&
       (e.target === this.canvas ||
         (IS_MOBILE && Runner.audioCues && e.target === this.containerEl))
-  },
-
-  /**
+  }, /**
    * RequestAnimationFrame wrapper.
    */
   scheduleNextUpdate () {
@@ -1210,17 +1135,13 @@ Runner.prototype = {
       this.updatePending = true
       this.raqId = requestAnimationFrame(this.update.bind(this))
     }
-  },
-
-  /**
+  }, /**
    * Whether the game is running.
    * @return {boolean}
    */
   isRunning () {
     return !!this.raqId
-  },
-
-  /**
+  }, /**
    * Set the initial high score as stored in the user's profile.
    * @param {number} highScore
    */
@@ -1229,15 +1150,13 @@ Runner.prototype = {
     highScore = Math.ceil(highScore)
     if (highScore < this.highestScore) {
       if (window.errorPageController) {
-        errorPageController.updateEasterEggHighScore(this.highestScore)
+        window.errorPageController.updateEasterEggHighScore(this.highestScore)
       }
       return
     }
     this.highestScore = highScore
     this.distanceMeter.setHighScore(this.highestScore)
-  },
-
-  /**
+  }, /**
    * Sets the current high score and saves to the profile if available.
    * @param {number} distanceRan Total distance ran.
    * @param {boolean=} optResetScore Whether to reset the score.
@@ -1249,14 +1168,12 @@ Runner.prototype = {
     // Store the new high score in the profile.
     if (this.syncHighestScore && window.errorPageController) {
       if (optResetScore) {
-        errorPageController.resetEasterEggHighScore()
+        window.errorPageController.resetEasterEggHighScore()
       } else {
-        errorPageController.updateEasterEggHighScore(this.highestScore)
+        window.errorPageController.updateEasterEggHighScore(this.highestScore)
       }
     }
-  },
-
-  /**
+  }, /**
    * Game over state.
    */
   gameOver () {
@@ -1320,7 +1237,6 @@ Runner.prototype = {
     this.showSpeedToggle()
     this.disableSpeedToggle(false)
   },
-
   stop () {
     this.setPlayStatus(false)
     this.paused = true
@@ -1328,7 +1244,6 @@ Runner.prototype = {
     this.raqId = 0
     this.generatedSoundFx.stopAll()
   },
-
   play () {
     if (!this.crashed) {
       this.setPlayStatus(true)
@@ -1339,7 +1254,6 @@ Runner.prototype = {
       this.generatedSoundFx.background()
     }
   },
-
   restart () {
     if (!this.raqId) {
       this.playCount++
@@ -1366,35 +1280,27 @@ Runner.prototype = {
       announcePhrase(getA11yString(A11Y_STRINGS.started))
     }
   },
-
   setPlayStatus (isPlaying) {
     if (this.touchController) {
       this.touchController.classList.toggle(HIDDEN_CLASS, !isPlaying)
     }
     this.playing = isPlaying
-  },
-
-  /**
+  }, /**
    * Whether the game should go into arcade mode.
+   *
+   * This has been changed to allow the game mode to always be enabled.
+   *
    * @return {boolean}
    */
   isArcadeMode () {
-    // In RTL languages the title is wrapped with the left to right mark
-    // control characters &#x202A; and &#x202C but are invisible.
-    return IS_RTL
-      ? document.title.indexOf(ARCADE_MODE_URL) == 1
-      : document.title === ARCADE_MODE_URL
-  },
-
-  /**
+    return true
+  }, /**
    * Hides offline messaging for a fullscreen game only experience.
    */
   setArcadeMode () {
     document.body.classList.add(Runner.classes.ARCADE_MODE)
     this.setArcadeModeContainerScale()
-  },
-
-  /**
+  }, /**
    * Sets the scaling for arcade mode.
    */
   setArcadeModeContainerScale () {
@@ -1413,9 +1319,7 @@ Runner.prototype = {
     const cssScale = IS_RTL ? -scale + ',' + scale : scale
     this.containerEl.style.transform =
       'scale(' + cssScale + ') translateY(' + translateY + 'px)'
-  },
-
-  /**
+  }, /**
    * Pause the game if the tab is not in focus.
    */
   onVisibilityChange (e) {
@@ -1426,9 +1330,7 @@ Runner.prototype = {
       this.tRex.reset()
       this.play()
     }
-  },
-
-  /**
+  }, /**
    * Play a sound.
    * @param {AudioBuffer} soundBuffer
    */
@@ -1439,9 +1341,7 @@ Runner.prototype = {
       sourceNode.connect(this.audioContext.destination)
       sourceNode.start(0)
     }
-  },
-
-  /**
+  }, /**
    * Inverts the current page / canvas colors.
    * @param {boolean} reset Whether to reset colors.
    */
@@ -1469,11 +1369,11 @@ Runner.prototype = {
  * http://www.html5rocks.com/en/tutorials/canvas/hidpi/
  *
  * @param {HTMLCanvasElement} canvas
- * @param {number=} opt_width
- * @param {number=} opt_height
+ * @param {number=} optWidth
+ * @param {number=} optHeight
  * @return {boolean} Whether the canvas was scaled.
  */
-Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
+Runner.updateCanvasScaling = function (canvas, optWidth, optHeight) {
   const context =
     /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'))
 
@@ -1486,8 +1386,8 @@ Runner.updateCanvasScaling = function (canvas, opt_width, opt_height) {
 
   // Upscale the canvas if the two ratios don't match
   if (devicePixelRatio !== backingStoreRatio) {
-    const oldWidth = opt_width || canvas.width
-    const oldHeight = opt_height || canvas.height
+    const oldWidth = optWidth || canvas.width
+    const oldHeight = optHeight || canvas.height
 
     canvas.width = oldWidth * ratio
     canvas.height = oldHeight * ratio
@@ -1531,12 +1431,10 @@ GeneratedSoundFx.prototype = {
     this.audioCues = true
     if (!this.context) {
       // iOS only supports the webkit version.
-      this.context = window.webkitAudioContext
-        ? new webkitAudioContext()
-        : new AudioContext()
+      this.context = new AudioContext()
       if (IS_IOS) {
         this.context.onstatechange = function () {
-          if (this.context.state != 'running') {
+          if (this.context.state !== 'running') {
             this.context.resume()
           }
         }.bind(this)
@@ -1557,10 +1455,10 @@ GeneratedSoundFx.prototype = {
    * @param {number} frequency
    * @param {number} startTime
    * @param {number} duration
-   * @param {?number=} opt_vol
-   * @param {number=} opt_pan
+   * @param {?number=} optVol
+   * @param {number=} optPan
    */
-  playNote (frequency, startTime, duration, opt_vol, opt_pan) {
+  playNote (frequency, startTime, duration, optVol, optPan) {
     const osc1 = this.context.createOscillator()
     const osc2 = this.context.createOscillator()
     const volume = this.context.createGain()
@@ -1572,7 +1470,7 @@ GeneratedSoundFx.prototype = {
 
     // Set up node routing
     if (this.panner) {
-      this.panner.pan.value = opt_pan || 0
+      this.panner.pan.value = optPan || 0
       osc1.connect(volume).connect(this.panner)
       osc2.connect(volume).connect(this.panner)
       this.panner.connect(this.context.destination)
@@ -1587,7 +1485,7 @@ GeneratedSoundFx.prototype = {
     osc2.frequency.value = frequency - 2
 
     // Fade out
-    volume.gain.setValueAtTime(opt_vol || 0.01, startTime + duration - 0.05)
+    volume.gain.setValueAtTime(optVol || 0.01, startTime + duration - 0.05)
     volume.gain.linearRampToValueAtTime(0.00001, startTime + duration)
 
     // Start oscillators
@@ -1644,19 +1542,6 @@ GeneratedSoundFx.prototype = {
 }
 
 /**
- * Speak a phrase using Speech Synthesis API for a11y.
- * @param {string} phrase Sentence to speak.
- */
-function speakPhrase (phrase) {
-  if ('speechSynthesis' in window) {
-    const msg = new SpeechSynthesisUtterance(phrase)
-    const voices = window.speechSynthesis.getVoices()
-    msg.text = phrase
-    speechSynthesis.speak(msg)
-  }
-}
-
-/**
  * For screen readers make an announcement to the live region.
  * @param {string} phrase Sentence to speak.
  */
@@ -1702,15 +1587,15 @@ function vibrate (duration) {
  * @param {Element} container Element to append canvas to.
  * @param {number} width
  * @param {number} height
- * @param {string=} opt_classname
+ * @param {string=} optClassname
  * @return {HTMLCanvasElement}
  */
-function createCanvas (container, width, height, opt_classname) {
+function createCanvas (container, width, height, optClassname) {
   const canvas =
     /** @type {!HTMLCanvasElement} */ (document.createElement('canvas'))
-  canvas.className = opt_classname
+  canvas.className = optClassname
     ? Runner.classes.CANVAS + ' ' +
-    opt_classname
+    optClassname
     : Runner.classes.CANVAS
   canvas.width = width
   canvas.height = height
@@ -1751,21 +1636,24 @@ function getTimeStamp () {
  * @param {Object} textImgPos
  * @param {Object} restartImgPos
  * @param {!Object} dimensions Canvas dimensions.
- * @param {Object=} opt_altGameEndImgPos
- * @param {boolean=} opt_altGameActive
+ * @param {Object=} optAltGameEndImgPos
+ * @param {boolean=} optAltGameActive
  * @constructor
  */
-function GameOverPanel (
-  canvas, textImgPos, restartImgPos, dimensions, opt_altGameEndImgPos,
-  opt_altGameActive) {
+function GameOverPanel (canvas,
+  textImgPos,
+  restartImgPos,
+  dimensions,
+  optAltGameEndImgPos,
+  optAltGameActive) {
   this.canvas = canvas
   this.canvasCtx =
     /** @type {CanvasRenderingContext2D} */ (canvas.getContext('2d'))
   this.canvasDimensions = dimensions
   this.textImgPos = textImgPos
   this.restartImgPos = restartImgPos
-  this.altGameEndImgPos = opt_altGameEndImgPos
-  this.altGameModeActive = opt_altGameActive
+  this.altGameEndImgPos = optAltGameEndImgPos
+  this.altGameModeActive = optAltGameActive
 
   // Retry animation.
   this.frameTimeStamp = 0
@@ -1808,17 +1696,17 @@ GameOverPanel.prototype = {
   /**
    * Update the panel dimensions.
    * @param {number} width New canvas width.
-   * @param {number} opt_height Optional new canvas height.
+   * @param {number} optHeight Optional new canvas height.
    */
-  updateDimensions (width, opt_height) {
+  updateDimensions (width, optHeight) {
     this.canvasDimensions.WIDTH = width
-    if (opt_height) {
-      this.canvasDimensions.HEIGHT = opt_height
+    if (optHeight) {
+      this.canvasDimensions.HEIGHT = optHeight
     }
     this.currentFrame = GameOverPanel.animConfig.frames.length - 1
   },
 
-  drawGameOverText (dimensions, opt_useAltText) {
+  drawGameOverText (dimensions, optUseAltText) {
     const centerX = this.canvasDimensions.WIDTH / 2
     let textSourceX = dimensions.TEXT_X
     let textSourceY = dimensions.TEXT_Y
@@ -1837,13 +1725,13 @@ GameOverPanel.prototype = {
       textSourceHeight *= 2
     }
 
-    if (!opt_useAltText) {
+    if (!optUseAltText) {
       textSourceX += this.textImgPos.x
       textSourceY += this.textImgPos.y
     }
 
     const spriteSource =
-      opt_useAltText ? Runner.altCommonImageSprite : Runner.origImageSprite
+      optUseAltText ? Runner.altCommonImageSprite : Runner.origImageSprite
 
     this.canvasCtx.save()
 
@@ -1922,17 +1810,17 @@ GameOverPanel.prototype = {
 
   /**
    * Draw the panel.
-   * @param {boolean} opt_altGameModeActive
-   * @param {!Trex} opt_tRex
+   * @param {boolean} optAltGameModeActive
+   * @param {!Trex} optTRex
    */
-  draw (opt_altGameModeActive, opt_tRex) {
-    if (opt_altGameModeActive) {
-      this.altGameModeActive = opt_altGameModeActive
+  draw (optAltGameModeActive, optTRex) {
+    if (optAltGameModeActive) {
+      this.altGameModeActive = optAltGameModeActive
     }
 
     this.drawGameOverText(GameOverPanel.dimensions, false)
     this.drawRestartButton()
-    this.drawAltGameElements(opt_tRex)
+    this.drawAltGameElements(optTRex)
     this.update()
   },
 
@@ -1948,7 +1836,7 @@ GameOverPanel.prototype = {
     this.flashTimer += deltaTime
 
     // Restart Button
-    if (this.currentFrame == 0 &&
+    if (this.currentFrame === 0 &&
       this.animTimer > GameOverPanel.LOGO_PAUSE_DURATION) {
       this.animTimer = 0
       this.currentFrame++
@@ -1962,7 +1850,7 @@ GameOverPanel.prototype = {
       }
     } else if (
       !this.altGameModeActive &&
-      this.currentFrame == GameOverPanel.animConfig.frames.length) {
+      this.currentFrame === GameOverPanel.animConfig.frames.length) {
       this.reset()
       return
     }
@@ -2030,12 +1918,12 @@ GameOverPanel.prototype = {
  * Check for a collision.
  * @param {!Obstacle} obstacle
  * @param {!Trex} tRex T-rex object.
- * @param {CanvasRenderingContext2D=} opt_canvasCtx Optional canvas context for
+ * @param {CanvasRenderingContext2D=} optCanvasCtx Optional canvas context for
  *    drawing collision boxes.
  * @return {Array<CollisionBox>|undefined}
  */
-function checkForCollision (obstacle, tRex, opt_canvasCtx) {
-  const obstacleBoxXPos = Runner.defaultDimensions.WIDTH + obstacle.xPos
+function checkForCollision (obstacle, tRex, optCanvasCtx) {
+  // const obstacleBoxXPos = Runner.defaultDimensions.WIDTH + obstacle.xPos
 
   // Adjustments are made to the bounding box as there is a 1 pixel white
   // border around the t-rex and obstacles.
@@ -2052,8 +1940,8 @@ function checkForCollision (obstacle, tRex, opt_canvasCtx) {
     obstacle.typeConfig.height - 2)
 
   // Debug outer box
-  if (opt_canvasCtx) {
-    drawCollisionBoxes(opt_canvasCtx, tRexBox, obstacleBox)
+  if (optCanvasCtx) {
+    drawCollisionBoxes(optCanvasCtx, tRexBox, obstacleBox)
   }
 
   // Simple outer bounds check.
@@ -2080,8 +1968,8 @@ function checkForCollision (obstacle, tRex, opt_canvasCtx) {
         const crashed = boxCompare(adjTrexBox, adjObstacleBox)
 
         // Draw boxes for debug.
-        if (opt_canvasCtx) {
-          drawCollisionBoxes(opt_canvasCtx, adjTrexBox, adjObstacleBox)
+        if (optCanvasCtx) {
+          drawCollisionBoxes(optCanvasCtx, adjTrexBox, adjObstacleBox)
         }
 
         if (crashed) {
@@ -2128,15 +2016,9 @@ function drawCollisionBoxes (canvasCtx, tRexBox, obstacleBox) {
  */
 function boxCompare (tRexBox, obstacleBox) {
   let crashed = false
-  const tRexBoxX = tRexBox.x
-  const tRexBoxY = tRexBox.y
-
-  const obstacleBoxX = obstacleBox.x
-  const obstacleBoxY = obstacleBox.y
-
   // Axis-Aligned Bounding Box method.
-  if (tRexBox.x < obstacleBoxX + obstacleBox.width &&
-    tRexBox.x + tRexBox.width > obstacleBoxX &&
+  if (tRexBox.x < obstacleBox.x + obstacleBox.width &&
+    tRexBox.x + tRexBox.width > obstacleBox.x &&
     tRexBox.y < obstacleBox.y + obstacleBox.height &&
     tRexBox.height + tRexBox.y > obstacleBox.y) {
     crashed = true
@@ -2172,13 +2054,19 @@ export function CollisionBox (x, y, w, h) {
  * @param {Object} dimensions
  * @param {number} gapCoefficient Mutipler in determining the gap.
  * @param {number} speed
- * @param {number=} opt_xOffset
- * @param {boolean=} opt_isAltGameMode
+ * @param {number=} optXOffset
+ * @param {boolean=} optIsAltGameMode
  * @constructor
  */
 function Obstacle (
-  canvasCtx, type, spriteImgPos, dimensions, gapCoefficient, speed,
-  opt_xOffset, opt_isAltGameMode) {
+  canvasCtx,
+  type,
+  spriteImgPos,
+  dimensions,
+  gapCoefficient,
+  speed,
+  optXOffset,
+  optIsAltGameMode) {
   this.canvasCtx = canvasCtx
   this.spritePos = spriteImgPos
   this.typeConfig = type
@@ -2186,14 +2074,14 @@ function Obstacle (
   this.size = getRandomNum(1, Obstacle.MAX_OBSTACLE_LENGTH)
   this.dimensions = dimensions
   this.remove = false
-  this.xPos = dimensions.WIDTH + (opt_xOffset || 0)
+  this.xPos = dimensions.WIDTH + (optXOffset || 0)
   this.yPos = 0
   this.width = 0
   this.collisionBoxes = []
   this.gap = 0
   this.speedOffset = 0
-  this.altGameModeActive = opt_isAltGameMode
-  this.imageSprite = this.typeConfig.type == 'COLLECTABLE'
+  this.altGameModeActive = optIsAltGameMode
+  this.imageSprite = this.typeConfig.type === 'COLLECTABLE'
     ? Runner.altCommonImageSprite
     : this.altGameModeActive ? Runner.altGameImageSprite : Runner.imageSprite
 
@@ -2547,7 +2435,7 @@ Trex.prototype = {
 
     // Update Trex config
     Trex.config.GRAVITY = spriteDefinition.GRAVITY || Trex.config.GRAVITY
-    Trex.config.HEIGHT = spriteDefinition.RUNNING_1.h,
+    Trex.config.HEIGHT = spriteDefinition.RUNNING_1.h
     Trex.config.INITIAL_JUMP_VELOCITY = spriteDefinition.INITIAL_JUMP_VELOCITY
     Trex.config.MAX_JUMP_HEIGHT = spriteDefinition.MAX_JUMP_HEIGHT
     Trex.config.MIN_JUMP_HEIGHT = spriteDefinition.MIN_JUMP_HEIGHT
@@ -2567,12 +2455,12 @@ Trex.prototype = {
 
   /**
    * Slow speeds adjustments for the alt game modes.
-   * @param {number=} opt_gravityValue
+   * @param {number=} optGravityValue
    */
-  adjustAltGameConfigForSlowSpeed: function (opt_gravityValue) {
+  adjustAltGameConfigForSlowSpeed: function (optGravityValue) {
     if (Runner.slowDown) {
-      if (opt_gravityValue) {
-        Trex.config.GRAVITY = opt_gravityValue / 1.5
+      if (optGravityValue) {
+        Trex.config.GRAVITY = optGravityValue / 1.5
       }
       Trex.config.MIN_JUMP_HEIGHT *= 1.5
       Trex.config.MAX_JUMP_HEIGHT *= 1.5
@@ -2602,19 +2490,19 @@ Trex.prototype = {
   /**
    * Set the animation status.
    * @param {!number} deltaTime
-   * @param {Trex.status=} opt_status Optional status to switch to.
+   * @param {Trex.status=} optStatus Optional status to switch to.
    */
-  update (deltaTime, opt_status) {
+  update (deltaTime, optStatus) {
     this.timer += deltaTime
 
     // Update the status.
-    if (opt_status) {
-      this.status = opt_status
+    if (optStatus) {
+      this.status = optStatus
       this.currentFrame = 0
-      this.msPerFrame = Trex.animFrames[opt_status].msPerFrame
-      this.currentAnimFrames = Trex.animFrames[opt_status].frames
+      this.msPerFrame = Trex.animFrames[optStatus].msPerFrame
+      this.currentAnimFrames = Trex.animFrames[optStatus].frames
 
-      if (opt_status === Trex.status.WAITING) {
+      if (optStatus === Trex.status.WAITING) {
         this.animStartTime = getTimeStamp()
         this.setBlinkDelay()
       }
@@ -2634,8 +2522,7 @@ Trex.prototype = {
 
     // Update the frame position.
     if (!this.flashing && this.timer >= this.msPerFrame) {
-      this.currentFrame = this.currentFrame ==
-      this.currentAnimFrames.length - 1
+      this.currentFrame = this.currentFrame === this.currentAnimFrames.length - 1
         ? 0
         : this.currentFrame + 1
       this.timer = 0
@@ -2798,22 +2685,17 @@ Trex.prototype = {
     this.jumpVelocity += this.config.GRAVITY * framesElapsed
 
     // Minimum height has been reached.
-    if (this.config.INVERT_JUMP && (this.yPos > this.minJumpHeight) ||
-      !this.config.INVERT_JUMP && (this.yPos < this.minJumpHeight) ||
-      this.speedDrop) {
+    if ((this.config.INVERT_JUMP && (this.yPos > this.minJumpHeight)) && !(!this.config.INVERT_JUMP && (this.yPos < this.minJumpHeight)) && !this.speedDrop) {
       this.reachedMinHeight = true
     }
 
     // Reached max height.
-    if (this.config.INVERT_JUMP && (this.yPos > -this.config.MAX_JUMP_HEIGHT) ||
-      !this.config.INVERT_JUMP && (this.yPos < this.config.MAX_JUMP_HEIGHT) ||
-      this.speedDrop) {
+    if ((this.config.INVERT_JUMP && (this.yPos > -this.config.MAX_JUMP_HEIGHT)) && !(!this.config.INVERT_JUMP && (this.yPos < this.config.MAX_JUMP_HEIGHT)) && !this.speedDrop) {
       this.endJump()
     }
 
     // Back down at ground level. Jump completed.
-    if ((this.config.INVERT_JUMP && this.yPos) < this.groundYPos ||
-      (!this.config.INVERT_JUMP && this.yPos) > this.groundYPos) {
+    if ((this.config.INVERT_JUMP && this.yPos) < this.groundYPos || (!this.config.INVERT_JUMP && this.yPos) > this.groundYPos) {
       this.reset()
       this.jumpCount++
 
@@ -2971,9 +2853,9 @@ DistanceMeter.prototype = {
    * Draw a digit to canvas.
    * @param {number} digitPos Position of the digit.
    * @param {number} value Digit value 0-9.
-   * @param {boolean=} opt_highScore Whether drawing the high score.
+   * @param {boolean=} optHighScore Whether drawing the high score.
    */
-  draw (digitPos, value, opt_highScore) {
+  draw (digitPos, value, optHighScore) {
     let sourceWidth = DistanceMeter.dimensions.WIDTH
     let sourceHeight = DistanceMeter.dimensions.HEIGHT
     let sourceX = DistanceMeter.dimensions.WIDTH * value
@@ -2997,7 +2879,7 @@ DistanceMeter.prototype = {
     this.canvasCtx.save()
 
     if (IS_RTL) {
-      if (opt_highScore) {
+      if (optHighScore) {
         this.canvasCtx.translate(
           this.canvasWidth -
           (DistanceMeter.dimensions.WIDTH * (this.maxScoreUnits + 3)),
@@ -3010,7 +2892,7 @@ DistanceMeter.prototype = {
     } else {
       const highScoreX =
         this.x - (this.maxScoreUnits * 2) * DistanceMeter.dimensions.WIDTH
-      if (opt_highScore) {
+      if (optHighScore) {
         this.canvasCtx.translate(highScoreX, this.y)
       } else {
         this.canvasCtx.translate(this.x, this.y)
@@ -3054,7 +2936,7 @@ DistanceMeter.prototype = {
     if (!this.achievement) {
       distance = this.getActualDistance(distance)
       // Score has gone beyond the initial digit count.
-      if (distance > this.maxScore && this.maxScoreUnits ==
+      if (distance > this.maxScore && this.maxScoreUnits ===
         this.config.MAX_DISTANCE_UNITS) {
         this.maxScoreUnits++
         this.maxScore = parseInt(this.maxScore + '9', 10)
@@ -4033,9 +3915,8 @@ Horizon.prototype = {
    */
   addNewObstacle (currentSpeed) {
     const obstacleCount =
-      Obstacle.types[Obstacle.types.length - 1].type != 'COLLECTABLE' ||
-      (Runner.isAltGameModeEnabled() && !this.altGameModeActive ||
-        this.altGameModeActive)
+      (Obstacle.types[Obstacle.types.length - 1].type !== 'COLLECTABLE') ||
+      ((Runner.isAltGameModeEnabled() && !this.altGameModeActive) && !this.altGameModeActive)
         ? Obstacle.types.length - 1
         : Obstacle.types.length - 2
     const obstacleTypeIndex =
@@ -4121,7 +4002,7 @@ Horizon.prototype = {
       let type = backgroundElTypes[index]
 
       // Add variation if available.
-      while (type == this.lastEl && backgroundElTypes.length > 1) {
+      while (type === this.lastEl && backgroundElTypes.length > 1) {
         index = getRandomNum(0, backgroundElTypes.length - 1)
         type = backgroundElTypes[index]
       }

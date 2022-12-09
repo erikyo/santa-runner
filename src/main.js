@@ -14,15 +14,29 @@ import ScoreReached from './sounds/score-reached.mp3'
 
 import './scripts/jstemplate_compiled'
 import './scripts/interstitial_mobile_nav'
-import './scripts/load_time_data_deprecated'
 import './scripts/offline'
 import './scripts/offline-sprite-definitions'
 import './scripts/error_page_controller_ios'
 
 import { primaryControlOnLeft, onDocumentLoadOrUpdate } from './scripts/neterror'
-import {loadTimeData} from "./scripts/load_time_data_deprecated";
+
+import { loadTimeData } from './scripts/load_time_data_deprecated'
+import { en } from './scripts/i18n'
+
+loadTimeData.data = {
+  ...en
+}
 
 function onDocumentLoad () {
+  const tp = document.getElementById('t')
+  window.jstProcess(new window.JsEvalContext(loadTimeData.data), tp)
+
+  document.dir = loadTimeData.data.textdirection
+  document.lang = loadTimeData.data.language
+  document.title = loadTimeData.data.title
+  document.body.style.fontFamily = loadTimeData.data.fontfamily
+  document.body.style.fontSize = loadTimeData.data.fontsize
+
   // set sprites img element src
   document.getElementById('offline-resources-1x').src = OfflineSprite100
   document.getElementById('offline-resources-2x').src = OfflineSprite200
@@ -44,10 +58,5 @@ function onDocumentLoad () {
   }
 
   onDocumentLoadOrUpdate()
-
-  const tp = document.getElementById('t')
-  window.jstProcess(new window.JsEvalContext(loadTimeData.data), tp)
 }
 document.addEventListener('DOMContentLoaded', onDocumentLoad)
-
-console.log('load')

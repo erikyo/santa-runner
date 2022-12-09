@@ -449,7 +449,7 @@ html[dir='rtl'].offline .icon-offline {
 
 .offline.inverted {
   background-color: #fff;
-  filter: invert(1);
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .offline.inverted body {

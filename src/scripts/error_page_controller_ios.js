@@ -23,7 +23,7 @@ export const errorPageController = {
   cancelSavePage: function () {},
   listVisibilityChange: function () {},
 
-  // Track easter egg plays and high scores.
+  // Track Easter egg plays and high scores.
   trackEasterEgg: function () {
     __gCrWeb.message.invokeOnHost(
       { command: 'errorPageController.trackEasterEgg' })

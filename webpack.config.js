@@ -40,16 +40,8 @@ module.exports = (env, argv) => {
           use: ['babel-loader']
         },
         {
-          test: /\.(png|svg|mp3|woff2)$/i,
+          test: /\.(png|svg|mp3)$/i,
           type: 'asset/inline'
-        },
-        {
-          test: /\.(ico)$/i,
-          loader: 'file-loader',
-          options: {
-            name: '[path][name]',
-            context: 'src'
-          }
         }
       ]
     },
