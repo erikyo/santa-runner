@@ -33,7 +33,9 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload the game folder
-          path: '.'
+          path: |
+            dist
+            !dist/**/*.md
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
