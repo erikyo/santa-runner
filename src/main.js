@@ -15,7 +15,6 @@ import ScoreReached from './sounds/score-reached.mp3'
 import './scripts/jstemplate_compiled'
 import './scripts/interstitial_mobile_nav'
 import './scripts/offline'
-import './scripts/offline-sprite-definitions'
 import './scripts/error_page_controller_ios'
 
 import { primaryControlOnLeft, onDocumentLoadOrUpdate } from './scripts/neterror'

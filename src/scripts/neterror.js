@@ -1,5 +1,5 @@
-import { HIDDEN_CLASS, errorPageController } from './offline-sprite-definitions'
-import Runner from './offline'
+import Runner, { HIDDEN_CLASS } from './offline'
+import { errorPageController } from './error_page_controller_ios'
 import { loadTimeData } from './load_time_data_deprecated'
 import { mobileNav } from './interstitial_mobile_nav'
 
