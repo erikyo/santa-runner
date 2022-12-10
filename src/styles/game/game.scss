@@ -665,7 +665,7 @@ html[dir='rtl'].offline .icon-offline {
   }
 }
 
-@media (min-width: 420px) and (max-width: 736px) and(min-height: 240px) and (max-height: 420px) and(orientation: landscape) {
+@media (min-width: 420px) and (max-width: 736px) and (min-height: 240px) and (max-height: 420px) and (orientation: landscape) {
   .interstitial-wrapper {
     margin-bottom: 100px;
   }
