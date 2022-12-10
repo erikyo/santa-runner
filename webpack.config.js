@@ -1,4 +1,5 @@
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -49,7 +50,6 @@ module.exports = (env, argv) => {
       filename: '[name].js',
       path: path.resolve(__dirname, 'dist')
     },
-    devtool: 'inline-source-map',
     plugins: [
       new HtmlWebpackPlugin({ template: './src/index.html' }),
       new MiniCssExtractPlugin({
@@ -63,7 +63,8 @@ module.exports = (env, argv) => {
       },
       minimize: true,
       minimizer: [
-        new HtmlMinimizerPlugin()
+        new HtmlMinimizerPlugin(),
+        new TerserPlugin()
       ]
     }
   }
