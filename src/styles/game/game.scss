@@ -434,13 +434,14 @@ html[dir='rtl'].offline .icon-offline {
 .offline {
   transition: filter 1.5s cubic-bezier(0.65, 0.05, 0.36, 1),
   background-color 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+  background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 10%, rgb(255, 255, 255) 90%);
   .is_ios & {
     will-change:filter, background-color;
   }
 }
 
 .offline body {
-  transition: background-color 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+  transition: background 1.5s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
 .offline #main-message > p {
@@ -452,6 +453,7 @@ html[dir='rtl'].offline .icon-offline {
   filter: invert(1) hue-rotate(180deg);
 }
 
+.offline.night body,
 .offline.inverted body {
   background-color: #fff;
 }
@@ -475,6 +477,16 @@ html[dir='rtl'].offline .icon-offline {
   position: absolute;
   top: 35px;
   width: 44px;
+}
+
+.offline body.arcade-mode .runner-container {
+  background-color: rgb(0, 125, 210);
+  background: linear-gradient(180deg, rgb(32, 165, 255) 0%, rgb(61, 177, 255) 10%, rgba(255, 255, 255, 1) 90%);
+}
+
+.offline.night body.arcade-mode .runner-container {
+  background-color: rgb(11, 64, 154);
+  background: linear-gradient(180deg, rgb(0, 29, 44) 0%, rgb(39, 124, 178) 70%, rgba(255, 255, 255, 1) 90%);
 }
 
 .offline .runner-container:focus {
@@ -665,7 +677,7 @@ html[dir='rtl'].offline .icon-offline {
   }
 }
 
-@media (min-width: 420px) and (max-width: 736px) and(min-height: 240px) and (max-height: 420px) and(orientation: landscape) {
+@media (min-width: 420px) and (max-width: 736px) and (min-height: 240px) and (max-height: 420px) and (orientation: landscape) {
   .interstitial-wrapper {
     margin-bottom: 100px;
   }
